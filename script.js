@@ -23,12 +23,21 @@ listContainer.addEventListener(
       e.target.classList.toggle("checked");
       saveData();
     } else if (e.target.tagName === "SPAN") {
-      e.target.parentElement.remove();
-      saveData();
+      const listItem = e.target.parentElement;
+      
+      // Add destroy animation class
+      listItem.classList.add('destroy-animation');
+      
+      // After the animation completes, remove the element from the DOM
+      listItem.addEventListener('animationend', function() {
+        listItem.remove();
+        saveData();
+      });
     }
   },
   false
 );
+
 
 function saveData() {
   localStorage.setItem("data", listContainer.innerHTML);
