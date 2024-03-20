@@ -1,5 +1,6 @@
 const inputBox = document.getElementById("input-box");
 const listContainer = document.getElementById("list-container");
+const totalTasksIndicator = document.getElementById("total-tasks");
 
 function addTask() {
   if (inputBox.value === "") {
@@ -11,10 +12,22 @@ function addTask() {
     let span = document.createElement("span");
     span.innerHTML = "\u00d7";
     li.appendChild(span);
+    updateTotalTasks();
   }
   inputBox.value = "";
   saveData();
 }
+
+var input = document.getElementById("input-box");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+
+    event.preventDefault();
+
+    document.getElementById("addBtn").click();
+
+  }
+});
 
 listContainer.addEventListener(
   "click",
@@ -31,6 +44,7 @@ listContainer.addEventListener(
       // After the animation completes, remove the element from the DOM
       listItem.addEventListener('animationend', function() {
         listItem.remove();
+        updateTotalTasks();
         saveData();
       });
     }
@@ -47,3 +61,13 @@ function showData() {
   listContainer.innerHTML = localStorage.getItem("data");
 }
 showData();
+
+function updateTotalTasks() {
+  const totalTasks = listContainer.querySelectorAll("li").length;
+  if(totalTasks===0){
+    totalTasksIndicator.style.display = 'none'
+  }else{
+  totalTasksIndicator.textContent = `${totalTasks} tasks left`;
+  }
+
+}

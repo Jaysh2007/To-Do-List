@@ -124,6 +124,16 @@ ul li span:hover {
         animation: destroyAnimation 0.5s ease forwards;
 }
 
+#total-tasks{
+    margin-top: 15px;
+    color: #D38312;
+    opacity: 0.8;
+}
+hr{
+    margin-top: 10px;
+    opacity: 0.3;
+    color: rgb(139, 138, 138);
+}
 /* Animation */
 
 @keyframes dropAnimation {
